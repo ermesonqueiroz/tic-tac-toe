@@ -14,8 +14,13 @@ class Party {
     const playerAlreadyPlayed = this.turns.length > 0 &&
       this.turns.at(-1).playerId === turn.playerId
 
+    const duplicatedPosition = this.turns.find(
+      ({ position }) => position === turn.position
+    )
+
     if (this.winner) return
     if (playerAlreadyPlayed) return
+    if (duplicatedPosition) return
 
     this.turns.push(turn)
     this.hasWinner()

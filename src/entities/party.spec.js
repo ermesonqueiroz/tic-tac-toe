@@ -241,4 +241,28 @@ describe('Party entity', () => {
     expect(party.players).toEqual([playerOne, playerTwo])
     expect(party.winner).toBe(playerOne)
   })
+
+  it('Should not add turn with duplicated position', () => {
+    const id = randomUUID()
+    const playerOne = randomUUID()
+    const playerTwo = randomUUID()
+    
+    const party = new Party({
+      id,
+      players: [playerOne, playerTwo]
+    })
+
+    const turns = [
+      new Turn(playerOne, '1A'),
+      new Turn(playerTwo, '1A'),
+    ]
+
+    turns.forEach(turn => party.addTurn(turn))
+
+    expect(party).toBeInstanceOf(Party)
+    expect(party.id).toBe(id)
+    expect(party.turns).toHaveLength(turns.length - 1)
+    expect(party.players).toEqual([playerOne, playerTwo])
+    expect(party.winner).toBeNull()
+  })
 })
