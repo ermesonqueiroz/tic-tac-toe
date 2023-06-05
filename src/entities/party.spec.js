@@ -213,4 +213,32 @@ describe('Party entity', () => {
     expect(party.players).toEqual([playerOne, playerTwo])
     expect(party.winner).toBe(playerTwo)
   })
+
+  it('Should not add consecutive turns of the same player', () => {
+    const id = randomUUID()
+    const playerOne = randomUUID()
+    const playerTwo = randomUUID()
+    
+    const party = new Party({
+      id,
+      players: [playerOne, playerTwo]
+    })
+
+    const turns = [
+      new Turn(playerOne, '1A'),
+      new Turn(playerTwo, '2A'),
+      new Turn(playerTwo, '2B'),
+      new Turn(playerOne, '2B'),
+      new Turn(playerTwo, '3A'),
+      new Turn(playerOne, '3C'),
+    ]
+
+    turns.forEach(turn => party.addTurn(turn))
+
+    expect(party).toBeInstanceOf(Party)
+    expect(party.id).toBe(id)
+    expect(party.turns).toHaveLength(turns.length - 1)
+    expect(party.players).toEqual([playerOne, playerTwo])
+    expect(party.winner).toBe(playerOne)
+  })
 })

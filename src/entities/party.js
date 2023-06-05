@@ -11,7 +11,11 @@ class Party {
   }
 
   addTurn(turn) {
+    const playerAlreadyPlayed = this.turns.length > 0 &&
+      this.turns.at(-1).playerId === turn.playerId
+
     if (this.winner) return
+    if (playerAlreadyPlayed) return
 
     this.turns.push(turn)
     this.hasWinner()
