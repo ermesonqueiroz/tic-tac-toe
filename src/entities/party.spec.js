@@ -1,23 +1,23 @@
-const { Party } = require("./party")
+const { Match } = require("./match")
 const { Turn } = require("./turn")
 const { randomUUID } = require('node:crypto')
 
-describe('Party entity', () => {
-  it('Should create a party', () => {
+describe('Match entity', () => {
+  it('Should create a match', () => {
     const id = randomUUID()
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(0)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBeNull()
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(0)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBeNull()
   })
 
   it('Should player one win with a horizontal line', () => {
@@ -25,7 +25,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -38,13 +38,13 @@ describe('Party entity', () => {
       new Turn(playerOne, '3A'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerOne)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerOne)
   })
 
   it('Should player two win with a horizontal line', () => {
@@ -52,7 +52,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -66,13 +66,13 @@ describe('Party entity', () => {
       new Turn(playerTwo, '3A'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerTwo)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerTwo)
   })
 
   it('Should player one win with a vertical line', () => {
@@ -80,7 +80,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -93,13 +93,13 @@ describe('Party entity', () => {
       new Turn(playerOne, '1C'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerOne)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerOne)
   })
 
   it('Should player two win with a vertical line', () => {
@@ -107,7 +107,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -121,13 +121,13 @@ describe('Party entity', () => {
       new Turn(playerTwo, '1C'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerTwo)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerTwo)
   })
 
   it('Should player one win with a diagonal line', () => {
@@ -135,7 +135,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -148,13 +148,13 @@ describe('Party entity', () => {
       new Turn(playerOne, '3C'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerOne)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerOne)
   })
 
   it('Should player two win with a diagonal line', () => {
@@ -162,7 +162,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -176,13 +176,13 @@ describe('Party entity', () => {
       new Turn(playerTwo, '3A'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerTwo)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerTwo)
   })
 
   it('Should not add turns when a player has already won', () => {
@@ -190,7 +190,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -205,13 +205,13 @@ describe('Party entity', () => {
       new Turn(playerOne, '3B'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length - 1)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerTwo)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length - 1)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerTwo)
   })
 
   it('Should not add consecutive turns of the same player', () => {
@@ -219,7 +219,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -233,13 +233,13 @@ describe('Party entity', () => {
       new Turn(playerOne, '3C'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length - 1)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.winner).toBe(playerOne)
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length - 1)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.winner).toBe(playerOne)
   })
 
   it('Should not add turn with duplicated position', () => {
@@ -247,7 +247,7 @@ describe('Party entity', () => {
     const playerOne = randomUUID()
     const playerTwo = randomUUID()
     
-    const party = new Party({
+    const match = new Match({
       id,
       players: [playerOne, playerTwo]
     })
@@ -264,14 +264,14 @@ describe('Party entity', () => {
       new Turn(playerOne, '1C'),
     ]
 
-    turns.forEach(turn => party.addTurn(turn))
+    turns.forEach(turn => match.addTurn(turn))
 
-    expect(party).toBeInstanceOf(Party)
-    expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length)
-    expect(party.players).toEqual([playerOne, playerTwo])
-    expect(party.draw).toBeTruthy()
-    expect(party.winner).toBeNull()
-    expect(party.finished).toBeTruthy()
+    expect(match).toBeInstanceOf(Match)
+    expect(match.id).toBe(id)
+    expect(match.turns).toHaveLength(turns.length)
+    expect(match.players).toEqual([playerOne, playerTwo])
+    expect(match.draw).toBeTruthy()
+    expect(match.winner).toBeNull()
+    expect(match.finished).toBeTruthy()
   })
 })
