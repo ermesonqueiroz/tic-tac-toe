@@ -4,10 +4,20 @@ class Party {
     this.players = players
     this.turns = []
     this.winner = null
+    this.finished = false
+    this.draw = false
   }
 
-  setWinner(winner) {
+  setWinner(winner = false) {
     this.winner = winner
+  }
+
+  setDraw(draw = false) {
+    this.draw = draw
+  }
+
+  setFinished(finished = false) {
+    this.finished = finished
   }
 
   addTurn(turn) {
@@ -23,10 +33,20 @@ class Party {
     if (duplicatedPosition) return
 
     this.turns.push(turn)
-    this.hasWinner()
+    this.verifyWinner()
+    this.verifyDraw()
   }
 
-  hasWinner() {
+  verifyDraw() {
+    const draw = this.turns.length === 9 && !this.winner
+      ? true
+      : false
+
+    this.setDraw(draw)
+    this.setFinished(draw)
+  }
+
+  verifyWinner() {
     const results = this.players.map(player => {
       const playerTurns = this.turns
         .filter(({ playerId }) => player === playerId)
@@ -62,7 +82,10 @@ class Party {
     })
 
     results.forEach((result, i) => {
-      if (result) this.setWinner(this.players[i])
+      if (result) {
+        this.setWinner(this.players[i])
+        this.setFinished(true)
+      }
     })
   
     return results.some(result => result)

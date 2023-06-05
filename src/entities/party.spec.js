@@ -254,15 +254,24 @@ describe('Party entity', () => {
 
     const turns = [
       new Turn(playerOne, '1A'),
-      new Turn(playerTwo, '1A'),
+      new Turn(playerTwo, '2A'),
+      new Turn(playerOne, '3A'),
+      new Turn(playerTwo, '2B'),
+      new Turn(playerOne, '2C'),
+      new Turn(playerTwo, '1B'),
+      new Turn(playerOne, '3B'),
+      new Turn(playerTwo, '3C'),
+      new Turn(playerOne, '1C'),
     ]
 
     turns.forEach(turn => party.addTurn(turn))
 
     expect(party).toBeInstanceOf(Party)
     expect(party.id).toBe(id)
-    expect(party.turns).toHaveLength(turns.length - 1)
+    expect(party.turns).toHaveLength(turns.length)
     expect(party.players).toEqual([playerOne, playerTwo])
+    expect(party.draw).toBeTruthy()
     expect(party.winner).toBeNull()
+    expect(party.finished).toBeTruthy()
   })
 })
