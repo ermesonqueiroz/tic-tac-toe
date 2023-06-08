@@ -242,6 +242,30 @@ describe('Match entity', () => {
     expect(match.winner).toBe(playerOne);
   });
 
+  it('Should not add turn with duplicated position', () => {
+    const id = randomUUID();
+    const playerOne = randomUUID();
+    const playerTwo = randomUUID();
+
+    const match = new Match({
+      id,
+      players: [playerOne, playerTwo],
+    });
+
+    const turns = [
+      new Turn(playerOne, '1A'),
+      new Turn(playerTwo, '1A'),
+    ];
+
+    turns.forEach((turn) => match.addTurn(turn));
+
+    expect(match).toBeInstanceOf(Match);
+    expect(match.id).toBe(id);
+    expect(match.turns).toHaveLength(turns.length - 1);
+    expect(match.players).toEqual([playerOne, playerTwo]);
+    expect(match.winner).toBeNull();
+  });
+
   it('Should draw', () => {
     const id = randomUUID();
     const playerOne = randomUUID();
