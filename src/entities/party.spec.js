@@ -242,7 +242,7 @@ describe('Match entity', () => {
     expect(match.winner).toBe(playerOne);
   });
 
-  it('Should not add turn with duplicated position', () => {
+  it('Should draw', () => {
     const id = randomUUID();
     const playerOne = randomUUID();
     const playerTwo = randomUUID();
